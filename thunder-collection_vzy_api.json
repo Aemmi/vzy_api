@@ -1,0 +1,70 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "vzy_api",
+    "dateExported": "2024-02-14T15:47:22.086Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "ee64c96a-c67e-48ce-b33a-2714280d1ce8",
+            "colId": "3b3da545-ed84-4a25-bcb9-8b0bc0604bcb",
+            "containerId": "",
+            "name": "user_login",
+            "url": "http://127.0.0.1:3002/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-02-14T15:46:10.626Z",
+            "modified": "2024-02-14T15:46:10.626Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"imawebservice2@gmail.com\",\n  \"password\": \"12345678\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "5dc900a1-cdb7-4e55-88d4-e507889fdd22",
+            "colId": "3b3da545-ed84-4a25-bcb9-8b0bc0604bcb",
+            "containerId": "",
+            "name": "user_register",
+            "url": "http://127.0.0.1:3002/register",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-02-14T15:46:25.456Z",
+            "modified": "2024-02-14T15:46:25.456Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"imawebservice2@gmail.com\",\n  \"password\": \"12345678\",\n  \"name\": \"Emmanuel Ayeh\",\n  \"country\": \"Nigeria\",\n  \"gender\": \"M\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "36559066-0964-4224-867a-a8f7d1a48554",
+            "colId": "3b3da545-ed84-4a25-bcb9-8b0bc0604bcb",
+            "containerId": "",
+            "name": "user_update",
+            "url": "http://127.0.0.1:3002/update",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-02-14T15:47:13.574Z",
+            "modified": "2024-02-14T15:47:13.574Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"imawebservice2@gmail.com\",\n  \"name\": \"Emmanuel Ayeh\",\n  \"gender\": \"M\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtbWFudWVsYXllaDFAZ21haWwuY29tIiwiaWF0IjoxNzA3OTA4MTg0LCJleHAiOjE3MDc5MTE3ODR9.a7HE0CSFd6MrD377E_5hPySkKtJVap0gMzzXc6lYuOo"
+            },
+            "tests": []
+        }
+    ]
+}
