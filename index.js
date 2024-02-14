@@ -37,8 +37,6 @@ app.post('/register', async (req, res) => {
     const country = req.body.country;
     const gender = req.body.gender;
 
-    console.log(req.body);
-
     if(email == null || password == null || name == null){
         return res.status(400).json({message: 'All fields are required!'});
     }
