@@ -18,6 +18,9 @@ let usersCollection = database.collection('customers');
 
 // Secret key for JWT encoding
 const SECRET_KEY = process.env.JWTSECRET;
+//stripe keys
+const stripe_secret = process.env.STRIPE_SKEY;
+const stripe_public = process.env.STRIPE_PKEY;
 
 app.use(bodyParser.json());
 
@@ -73,9 +76,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// Authorization middleware to check access token
-
-
 // Endpoint to update user records
 app.put('/update', authorize, async (req, res) => {
   const { email } = req.user;
@@ -88,6 +88,41 @@ app.put('/update', authorize, async (req, res) => {
     console.error('Error updating user record:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
+});
+
+async function updateUserStatus (email, status) {
+    try {
+        await usersCollection.updateOne({ email }, { $set: { status: status } });
+        res.status(200).json({ message: 'Payment successfully' });
+    } catch (error) {
+        console.error('Error updating user record:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+app.post('/stripe-webhook', async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, stripe_secret);
+    } catch (err) {
+        console.error('Error verifying webhook signature:', err);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    switch (event.type) {
+        case 'payment_intent.succeeded':
+            const paymentIntent = event.data.object;
+            const email = paymentIntent.metadata.userId;
+            // Update user status to "paid" in the database
+            updateUserStatus(email, 'paid');
+            break;
+        default:
+            console.log(`Unhandled event type: ${event.type}`);
+    }
+
+    res.json({ received: true });
 });
 
 app.listen(PORT, () => {
